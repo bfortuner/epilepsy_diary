@@ -1,17 +1,16 @@
-
-import boto
-import boto.s3
-import sys
-from boto.s3.key import Key
-
 import plotly.plotly as py
 import plotly.graph_objs as go
 from plotly.graph_objs import Scatter, Layout
 
-import random
+from diary_app.utils import id_generator
+from diary_app.clients import s3
+
+CHARTS_DIR_PATH="graphs/"
+CHARTS_S3_BUCKET="hapibot-graph"
+
 
 def createChart(data):
-	filename = random.getrandbits(32)
+	filename = id_generator.generate_chart_image_filename()
 	py.sign_in('hapibot', 'ix1yikrn67') # Replace the username, and API key with your credentials.
 
 	x = []
@@ -25,14 +24,12 @@ def createChart(data):
 	layout = go.Layout(title='Seizures', width=800, height=640)
 	fig = go.Figure(data=data, layout=layout)
 
-	py.image.save_as(fig, filename='graphs/' +str(filename) +'.png')
+	py.image.save_as(fig, filename=CHARTS_DIR_PATH+filename)
+	# conn = s3.get_connection()
+	s3.upload_file(filename, CHARTS_DIR_PATH+filename, CHARTS_S3_BUCKET)
 
-	s3_connection = boto.connect_s3()
-	bucket = s3_connection.get_bucket('hapibot-graph')
-	key = boto.s3.key.Key(bucket,str(filename))
-	key.set_contents_from_filename('graphs/' +str(filename) +'.png')
-
-	return 'https://hapibot-graph.s3.amazonaws.com/'+str(filename)
+	download_url = s3.get_download_url(bucket=CHARTS_S3_BUCKET, path=filename, expiry=603148) #7 days
+	return download_url
 
 data = [
     {
@@ -45,6 +42,7 @@ data = [
     }
 ]
 
-print createChart(data)
+if __name__ == "__main__":
+	print createChart(data)
 
 
