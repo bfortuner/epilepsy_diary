@@ -1,10 +1,12 @@
 from diary_app import application
 from flask import jsonify, request
 
-@application.route('/plugins', methods=['GET'])
-def get_job_type_plugins():
+@application.route('/event/<event_id>', methods=['GET'])
+def get_event(event_id):
+	print event_id
 	return jsonify({
-		'job_types' : "hey",
-		'job_type_plugins' : "there",
-		'plugins' : "mister"
+		'event_id' : event_id,
+		'event_type' : "seizure",
+		'duration' : 5,
+		'severity' : 2
 	})

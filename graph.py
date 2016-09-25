@@ -1,12 +1,9 @@
 import plotly.plotly as py
 import plotly.graph_objs as go
 from plotly.graph_objs import Scatter, Layout
-
 from diary_app.utils import id_generator
 from diary_app.clients import s3
-
-CHARTS_DIR_PATH="graphs/"
-CHARTS_S3_BUCKET="hapibot-graph"
+from diary_app.config import config
 
 def create_chart(input_data):
 	py.sign_in('hapibot', 'ix1yikrn67') # Replace the username, and API key with your credentials.
@@ -23,10 +20,10 @@ def create_chart(input_data):
               height=640)
 	chart = go.Figure(data=chart_data, layout=chart_layout)
 	filename = id_generator.generate_chart_image_filename()
-	py.image.save_as(chart, filename=CHARTS_DIR_PATH+filename)
+	py.image.save_as(chart, filename=config.LOCAL_CHARTS_DIR_PATH+filename)
 
-	s3.upload_file(filename, CHARTS_DIR_PATH+filename, CHARTS_S3_BUCKET)
-	download_url = s3.get_download_url(bucket=CHARTS_S3_BUCKET, path=filename, expiry=603148) #7 days
+	s3.upload_file(filename, config.LOCAL_CHARTS_DIR_PATH+filename, config.S3_USER_CHARTS_BUCKET)
+	download_url = s3.get_download_url(bucket=config.S3_USER_CHARTS_BUCKET, path=filename, expiry=603148) #7 days
 	
 	return download_url
 

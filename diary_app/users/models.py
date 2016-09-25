@@ -1,4 +1,3 @@
-#from diary_app.users.constants import *
 from diary_app.utils import id_generator
 from diary_app.database import Base
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
@@ -8,7 +7,7 @@ from sqlalchemy.sql import func
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    username = Column(String(128))
+    username = Column(String(128), nullable=False)
     created_at = Column(DateTime, default=func.now())
     last_updated = Column(DateTime, onupdate=func.now())
     event = relationship('Event', backref=backref('users'))

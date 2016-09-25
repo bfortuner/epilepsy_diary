@@ -3,9 +3,7 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.cors import CORS
 from diary_app.config import config
-# from diary_app.database import db
-# from diary_app.utils.constants import *
-
+from diary_app.database import db
 
 # Initialize App
 application = Flask(__name__)
@@ -25,6 +23,6 @@ jobs_log = logger.get_logger(JOBS_LOG_FILE, log_level=LOG_LEVEL)
 import diary_app.users.api
 import diary_app.events.api
 
-# @application.teardown_appcontext
-# def shutdown_session(exception=None):
-# 	db.remove()
+@application.teardown_appcontext
+def shutdown_session(exception=None):
+	db.remove()

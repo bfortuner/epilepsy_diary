@@ -8,5 +8,3 @@ def generate_random_filename(prefix, extension):
 
 def generate_chart_image_filename():
 	return generate_random_filename(USER_CHART_PREFIX,"."+USER_CHART_FILE_EXTENSION)
-
-print generate_chart_image_filename()
