@@ -8,7 +8,7 @@ from diary_app.database import db
 # Initialize App
 application = Flask(__name__)
 CORS(application)
-application.config.from_object('diary_app.config.TestConfig')  #+ os.getenv('TestConfig'))
+application.config.from_object('diary_app.config.' + os.getenv('EPILEPSY_CONFIG'))
 
 # Initialize Logging
 '''
