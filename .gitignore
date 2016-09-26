@@ -1,3 +1,5 @@
 charts/*.png
 *.pyc
 *.db
+.projectcmdhistory
+tests/.cache

@@ -49,7 +49,7 @@ def test_update_event_severity():
 
 	cleanup(event.id)
 
-def test_update_event_tracking_status_name():
+def test_update_event_tracking_status():
 	event = create_test_event()
 	assert event.event_tracking_status_name == 'CREATED'
 
