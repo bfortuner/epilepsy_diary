@@ -1,1 +1,1 @@
-ADMIN_USERNAME="admin"
+ADMIN_USERNAME = "admin"

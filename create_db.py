@@ -4,7 +4,6 @@ from diary_app.users.models import User
 from diary_app.users.constants import ADMIN_USERNAME
 from diary_app.events.constants import EVENT_TRACKING_STATUS_TYPES
 from datetime import datetime
-from diary_app.events import event_manager
 
 """
 DO NOT RUN THIS SCRIPT IN ''PROD'' IF DATABASE ALREADY HAS LIVE DATA!
@@ -24,16 +23,18 @@ print "User table loaded"
 
 # # Insert Event Tracking Status Type
 for status in EVENT_TRACKING_STATUS_TYPES:
-	event_tracking_status = EventTrackingStatus(status)
-	db.add(event_tracking_status)
+    event_tracking_status = EventTrackingStatus(status)
+    db.add(event_tracking_status)
 db.commit()
 
 print "Event Tracking Status Types loaded"
 
 # # Insert Test Event
-event_complete = Event(User.query.filter_by(username=ADMIN_USERNAME).first().id, 
-	datetime.now(), 'seizure', 3, 2, 'COMPLETE')
-event_incomplete = Event(User.query.filter_by(username=ADMIN_USERNAME).first().id)
+event_complete = Event(User.query.filter_by(
+    username=ADMIN_USERNAME).first().id,
+    datetime.now(), 'seizure', 3, 2, 'COMPLETE')
+event_incomplete = Event(User.query.filter_by(
+    username=ADMIN_USERNAME).first().id)
 db.add(event_complete)
 db.add(event_incomplete)
 db.commit()

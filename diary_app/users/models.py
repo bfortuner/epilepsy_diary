@@ -1,8 +1,8 @@
-from diary_app.utils import id_generator
 from diary_app.database import Base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.sql import func
+
 
 class User(Base):
     __tablename__ = 'users'
