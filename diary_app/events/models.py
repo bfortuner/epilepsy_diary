@@ -18,14 +18,14 @@ class Event(Base):
     db_record_created_at = Column(DateTime, default=func.now())
     db_record_last_updated = Column(DateTime, onupdate=func.now())
     event_tracking_status_name = Column(String(32),
-        ForeignKey('event_tracking_status_types.name'), nullable=False)
+            ForeignKey('event_tracking_status_types.name'), nullable=False)
     event_tracking_status = relationship('EventTrackingStatus',
-        backref=backref('events', lazy='dynamic'))
-    user = relationship('User', backref=backref('jobs', lazy='dynamic'))
+            backref=backref('events', lazy='dynamic'))
+    user = relationship('User', backref=backref('events', lazy='dynamic'))
 
     def __init__(self, user_id, event_time=datetime.now(),
-            event_type=None, event_severity=None, event_duration=None,
-            tracking_status_name='CREATED'):
+                 event_type=None, event_severity=None, event_duration=None,
+                 tracking_status_name='CREATED'):
         self.user_id = user_id
         self.event_time = event_time
         self.event_type = event_type
@@ -34,8 +34,15 @@ class Event(Base):
         self.event_tracking_status_name = tracking_status_name
 
     def __repr__(self):
-        return '<Event: %r, User: %s, EventType: %s>' % (
-            self.id, self.user.username, self.event_type)
+        return '<EventId: %r, ' \
+            'User:%s, ' \
+            'Type:%s, ' \
+            'Time:%s, ' \
+            'Duration:%s, ' \
+            'Severity:%s, ' \
+            'EventStatus:%s>' % (self.id, self.user.username, self.event_type,
+              self.event_time, self.event_duration, self.event_severity,
+              self.event_tracking_status)
 
 
 class EventTrackingStatus(Base):
@@ -47,4 +54,4 @@ class EventTrackingStatus(Base):
         self.name = name
 
     def __repr__(self):
-        return '<EventTrackingStatus %r>' % self.name
+        return '<%r>' % (self.name)

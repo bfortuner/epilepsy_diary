@@ -11,11 +11,12 @@ def get_or_create_user(username):
 	return user
 
 
-def get_events_by_user(username):
-	user = User.query.filter_by(username).first()
-	events = user.events.all()
-	return events
-
-
 def get_user_by_id(user_id):
 	return User.query.get(user_id)
+
+
+def get_events(username):
+	user = User.query.filter_by(username=username).first()
+	events = user.events.all()
+	print events
+	return events

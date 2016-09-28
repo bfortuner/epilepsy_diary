@@ -12,6 +12,8 @@ class Config(object):
     SECRET_KEY = os.getenv('APP_SECRET_KEY', 'secret')
     LOCAL_CHARTS_DIR_PATH = "charts/"
     DB_ISOLATION_LEVEL = 'READ UNCOMMITTED'
+    PLOTLY_PASSWORD = 'ix1yikrn67'
+    PLOTLY_USERNAME = 'hapibot'
     # AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY_ID', 'password')
     # AWS_SECRET_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', 'password')
 

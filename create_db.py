@@ -3,7 +3,7 @@ from diary_app.events.models import Event, EventTrackingStatus
 from diary_app.users.models import User
 from diary_app.users.constants import ADMIN_USERNAME
 from diary_app.events.constants import EVENT_TRACKING_STATUS_TYPES
-from datetime import datetime
+import datetime
 
 """
 DO NOT RUN THIS SCRIPT IN ''PROD'' IF DATABASE ALREADY HAS LIVE DATA!
@@ -30,13 +30,30 @@ db.commit()
 print "Event Tracking Status Types loaded"
 
 # # Insert Test Event
-event_complete = Event(User.query.filter_by(
-    username=ADMIN_USERNAME).first().id,
-    datetime.now(), 'seizure', 3, 2, 'COMPLETE')
-event_incomplete = Event(User.query.filter_by(
-    username=ADMIN_USERNAME).first().id)
-db.add(event_complete)
-db.add(event_incomplete)
-db.commit()
+# current_time = datetime.datetime.now()
+# event_complete = Event(User.query.filter_by(
+#     username=ADMIN_USERNAME).first().id,
+#     current_time, 'AURA', 3, 2, 'COMPLETE')
+# event_complete1 = Event(User.query.filter_by(
+#     username=ADMIN_USERNAME).first().id,
+#     current_time - datetime.timedelta(days=3), 'SEIZURE', 3, 2, 'COMPLETE')
+# event_complete2 = Event(User.query.filter_by(
+#     username=ADMIN_USERNAME).first().id,
+#     current_time - datetime.timedelta(days=5), 'SEIZURE', 3, 2, 'COMPLETE')
+# event_complete3 = Event(User.query.filter_by(
+#     username=ADMIN_USERNAME).first().id,
+#     current_time - datetime.timedelta(days=5), 'AURA', 3, 2, 'COMPLETE')
+# event_complete4 = Event(User.query.filter_by(
+#     username=ADMIN_USERNAME).first().id,
+#     current_time - datetime.timedelta(days=15), 'SEIZURE', 3, 2, 'COMPLETE')
+# event_incomplete = Event(User.query.filter_by(
+#     username=ADMIN_USERNAME).first().id)
+# db.add(event_complete)
+# db.add(event_complete1)
+# db.add(event_complete2)
+# db.add(event_complete3)
+# db.add(event_complete4)
+# db.add(event_incomplete)
+# db.commit()
 
 print "Event table loaded"

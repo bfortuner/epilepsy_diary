@@ -1,5 +1,7 @@
 from diary_app import db
+from sqlalchemy.sql import func
 from diary_app.events.models import Event
+from diary_app.users import user_manager
 
 
 def get_event(event_id):
@@ -7,8 +9,30 @@ def get_event(event_id):
     return event
 
 
-def get_user_events(user_id):
-    pass
+def get_events_in_date_range(username, start_time, end_time, event_type):
+    user = user_manager.get_or_create_user(username)
+    events = (db.query(Event)
+        .filter(Event.event_time.between(start_time, end_time))
+        .filter_by(user_id=user.id)
+        .filter_by(event_type=event_type)
+        .all())
+    return events
+
+
+def get_event_count_in_date_range(username, start_time, end_time, event_type):
+    """
+    Returns list of tuples (date, count) ordered by date ASC
+    e.g. [(u'2016-09-24', 1), (u'2016-09-27', 2)]
+    """
+    user = user_manager.get_or_create_user(username)
+    count_by_day = (db.query(func.DATE(Event.event_time), func.count(Event.id))
+        .filter(Event.event_time.between(start_time, end_time))
+        .filter_by(user_id=user.id)
+        .filter_by(event_type=event_type)
+        .group_by(func.DATE(Event.event_time))
+        .order_by(func.DATE(Event.event_time).asc())
+        .all())
+    return count_by_day
 
 
 def create_event(user_id, event_time, event_type, severity, duration):

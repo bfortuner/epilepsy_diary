@@ -3,3 +3,4 @@ charts/*.png
 *.db
 .projectcmdhistory
 tests/.cache
+__pycache__

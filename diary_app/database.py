@@ -20,6 +20,9 @@ db = scoped_session(sessionmaker(autocommit=False,
 Base = declarative_base()
 Base.query = db.query_property()
 
+from diary_app.users.models import User
+from diary_app.events.models import Event, EventTrackingStatus
+
 
 def init_db():
     Base.metadata.drop_all(bind=engine)
