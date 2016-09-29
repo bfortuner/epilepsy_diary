@@ -20,6 +20,7 @@ def get_event(event_id):
 
 @application.route('/event/create', methods=['POST'])
 def create_event():
+	print "creating event"
 	username = request.json['username']
 	event_time = datetime.datetime.utcnow()
 	user = user_manager.get_or_create_user(username)
@@ -34,6 +35,7 @@ def create_event():
 
 @application.route('/event/update', methods=['POST'])
 def update_event():
+	print request.json['event_id']
 	event_id = request.json['event_id']
 	event = event_manager.get_event(event_id)
 	event.event_type = request.json['event_type']

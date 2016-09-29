@@ -19,6 +19,7 @@ class Config(object):
 
 
 class ProdConfig(Config):
+    DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.getenv(
         'EPILEPSY_DATABASE_URI', 'sqlite:///database.db')
     S3_USER_CHARTS_BUCKET = 'epilepsy-user-charts'
