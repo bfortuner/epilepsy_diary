@@ -29,15 +29,22 @@ def get_event_count_in_date_range(username, start_time, end_time, event_type):
         .filter(Event.event_time.between(start_time, end_time))
         .filter_by(user_id=user.id)
         .filter_by(event_type=event_type)
+<<<<<<< HEAD
         .filter_by(event_tracking_status_name="COMPLETE")
+=======
+>>>>>>> dev
         .group_by(func.DATE(Event.event_time))
         .order_by(func.DATE(Event.event_time).asc())
         .all())
     return count_by_day
 
 
+<<<<<<< HEAD
 def create_event(user_id, event_time,
         event_type=None, severity=None, duration=None):
+=======
+def create_event(user_id, event_time, event_type, severity, duration):
+>>>>>>> dev
     event = Event(user_id, event_time, event_type, severity, duration)
     db.add(event)
     db.commit()

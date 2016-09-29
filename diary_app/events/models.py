@@ -25,7 +25,11 @@ class Event(Base):
 
     def __init__(self, user_id, event_time=datetime.now(),
                  event_type=None, event_severity=None, event_duration=None,
+<<<<<<< HEAD
                  event_tracking_status_name='CREATED'):
+=======
+                 tracking_status_name='CREATED'):
+>>>>>>> dev
         self.user_id = user_id
         self.event_time = event_time
         self.event_type = event_type
