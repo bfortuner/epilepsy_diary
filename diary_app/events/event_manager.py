@@ -29,13 +29,15 @@ def get_event_count_in_date_range(username, start_time, end_time, event_type):
         .filter(Event.event_time.between(start_time, end_time))
         .filter_by(user_id=user.id)
         .filter_by(event_type=event_type)
+        .filter_by(event_tracking_status_name="COMPLETE")
         .group_by(func.DATE(Event.event_time))
         .order_by(func.DATE(Event.event_time).asc())
         .all())
     return count_by_day
 
 
-def create_event(user_id, event_time, event_type, severity, duration):
+def create_event(user_id, event_time,
+        event_type=None, severity=None, duration=None):
     event = Event(user_id, event_time, event_type, severity, duration)
     db.add(event)
     db.commit()
@@ -44,6 +46,10 @@ def create_event(user_id, event_time, event_type, severity, duration):
 
 def delete_event(event_id):
     Event.query.filter_by(id=event_id).delete()
+    db.commit()
+
+
+def update_event(event):
     db.commit()
 
 
@@ -66,17 +72,19 @@ def update_event_severity(event_id, severity):
 
 
 def update_event_tracking_status(event_id):
-    attribs_required_for_complete_event = 3
+    attribs_required_for_complete_event = 2
     event = get_event(event_id)
     if event.event_type is not None:
         attribs_required_for_complete_event -= 1
-    if event.event_severity is not None:
-        attribs_required_for_complete_event -= 1
+    # if event.event_severity is not None:
+    #     attribs_required_for_complete_event -= 1
     if event.event_duration is not None:
         attribs_required_for_complete_event -= 1
 
     if attribs_required_for_complete_event == 0:
         event.event_tracking_status_name = 'COMPLETE'
-    elif attribs_required_for_complete_event < 3:
+    elif attribs_required_for_complete_event < 2:
         event.event_tracking_status_name = 'PARTIALLY_COMPLETE'
+    else:
+        event.event_tracking_status_name = 'CREATED'
     db.commit()

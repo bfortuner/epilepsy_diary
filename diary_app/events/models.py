@@ -25,13 +25,13 @@ class Event(Base):
 
     def __init__(self, user_id, event_time=datetime.now(),
                  event_type=None, event_severity=None, event_duration=None,
-                 tracking_status_name='CREATED'):
+                 event_tracking_status_name='CREATED'):
         self.user_id = user_id
         self.event_time = event_time
         self.event_type = event_type
         self.event_severity = event_severity
         self.event_duration = event_duration
-        self.event_tracking_status_name = tracking_status_name
+        self.event_tracking_status_name = event_tracking_status_name
 
     def __repr__(self):
         return '<EventId: %r, ' \
