@@ -14,7 +14,7 @@ class Event(Base):
     event_time = Column(DateTime, default=func.now())
     event_type = Column(String(128))
     event_severity = Column(Integer)
-    event_duration = Column(Integer)
+    event_duration = Column(String(128))
     db_record_created_at = Column(DateTime, default=func.now())
     db_record_last_updated = Column(DateTime, onupdate=func.now())
     event_tracking_status_name = Column(String(32),
@@ -25,11 +25,7 @@ class Event(Base):
 
     def __init__(self, user_id, event_time=datetime.now(),
                  event_type=None, event_severity=None, event_duration=None,
-<<<<<<< HEAD
                  event_tracking_status_name='CREATED'):
-=======
-                 tracking_status_name='CREATED'):
->>>>>>> dev
         self.user_id = user_id
         self.event_time = event_time
         self.event_type = event_type

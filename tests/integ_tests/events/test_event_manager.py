@@ -93,9 +93,9 @@ def test_delete_event():
 def test_update_event_type():
     event = helpers.create_test_event()
     assert event.event_type is None
-    event_manager.update_event_type(event.id, 'AURA')
+    event_manager.update_event_type(event.id, AURA_EVENT_TYPE)
     fetched_event = event_manager.get_event(event.id)
-    assert fetched_event.event_type == 'AURA'
+    assert fetched_event.event_type == AURA_EVENT_TYPE
 
     helpers.cleanup(event.id)
 
@@ -103,9 +103,9 @@ def test_update_event_type():
 def test_update_event_duration():
     event = helpers.create_test_event()
     assert event.event_duration is None
-    event_manager.update_event_duration(event.id, 99)
+    event_manager.update_event_duration(event.id, "1-3")
     fetched_event = event_manager.get_event(event.id)
-    assert fetched_event.event_duration == 99
+    assert fetched_event.event_duration == "1-3"
 
     helpers.cleanup(event.id)
 
@@ -124,7 +124,7 @@ def test_update_event_tracking_status():
     event = helpers.create_test_event()
     assert event.event_tracking_status_name == 'CREATED'
 
-    event_manager.update_event_type(event.id, 'AURA')
+    event_manager.update_event_type(event.id, AURA_EVENT_TYPE)
     event_manager.update_event_tracking_status(event.id)
     fetched_event = event_manager.get_event(event.id)
     assert fetched_event.event_tracking_status_name == 'PARTIALLY_COMPLETE'

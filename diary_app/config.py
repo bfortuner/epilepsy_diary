@@ -10,7 +10,6 @@ class Config(object):
     PLOTLY_USERNAME = "hapibot"
     PLOTLY_PASSWORD = "ix1yikrn67"
     SECRET_KEY = os.getenv('APP_SECRET_KEY', 'secret')
-    LOCAL_CHARTS_DIR_PATH = "charts/"
     DB_ISOLATION_LEVEL = 'READ UNCOMMITTED'
     PLOTLY_PASSWORD = 'ix1yikrn67'
     PLOTLY_USERNAME = 'hapibot'
@@ -25,6 +24,7 @@ class ProdConfig(Config):
     S3_USER_CHARTS_BUCKET = 'epilepsy-user-charts'
     APP_LOG_LEVEL = logging.INFO
     MAIL_LOG_LEVEL = logging.ERROR
+    LOCAL_CHARTS_DIR_PATH = "/tmp/"
 
 
 class TestConfig(Config):
@@ -34,6 +34,7 @@ class TestConfig(Config):
     S3_USER_CHARTS_BUCKET = 'test-epilepsy-user-charts'
     APP_LOG_LEVEL = logging.DEBUG
     MAIL_LOG_LEVEL = logging.ERROR
+    LOCAL_CHARTS_DIR_PATH = "charts/"
 
 
 config = globals()[os.getenv('EPILEPSY_CONFIG', 'TestConfig')]

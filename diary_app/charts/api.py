@@ -7,5 +7,5 @@ from flask import jsonify
 def get_chart(username):
     chart_url = chart_manager.get_chart(username)
     return jsonify({
-        'chart': chart_url
+        'chart_url': chart_url
     })

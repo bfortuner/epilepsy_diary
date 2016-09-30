@@ -14,6 +14,7 @@ def get_chart(username):
     start_time = current_time - datetime.timedelta(days=30)
     seizure_data = event_manager.get_event_count_in_date_range(
         username, start_time, current_time, SEIZURE_EVENT_TYPE)
+    print seizure_data
     dates = extract_dates_from_events(seizure_data)
     seizure_counts = extract_counts_from_events(seizure_data)
 

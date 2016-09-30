@@ -29,7 +29,6 @@ def create_test_event():
     return event
 
 
-<<<<<<< HEAD
 def create_test_event_by_date(event_time, event_type,
                             tracking_status="COMPLETE"):
     event = Event(User.query.filter_by(
@@ -37,13 +36,6 @@ def create_test_event_by_date(event_time, event_type,
         event_time=event_time,
         event_type=event_type,
         event_tracking_status_name=tracking_status)
-=======
-def create_test_event_by_date(event_time, event_type):
-    event = Event(User.query.filter_by(
-        username=ADMIN_USERNAME).first().id,
-        event_time=event_time,
-        event_type=event_type)
->>>>>>> dev
     db.add(event)
     db.commit()
     return event
