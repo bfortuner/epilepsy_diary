@@ -7,14 +7,10 @@ class Config(object):
     DEBUG = False
     WTF_CSRF_ENABLED = True
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-    PLOTLY_USERNAME = "hapibot"
-    PLOTLY_PASSWORD = "ix1yikrn67"
-    SECRET_KEY = os.getenv('APP_SECRET_KEY', 'secret')
+    SECRET_KEY = os.getenv('EPILEPSY_APP_SECRET_KEY', 'secret')
     DB_ISOLATION_LEVEL = 'READ UNCOMMITTED'
-    PLOTLY_PASSWORD = 'ix1yikrn67'
     PLOTLY_USERNAME = 'hapibot'
-    # AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY_ID', 'password')
-    # AWS_SECRET_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', 'password')
+    PLOTLY_PASSWORD = os.getenv('EPILEPSY_PLOTLY_PASSWORD')
 
 
 class ProdConfig(Config):
@@ -25,6 +21,7 @@ class ProdConfig(Config):
     APP_LOG_LEVEL = logging.INFO
     MAIL_LOG_LEVEL = logging.ERROR
     LOCAL_CHARTS_DIR_PATH = "/tmp/"
+    CLIENT_AUTH_KEY = os.getenv('EPILEPSY_CLIENT_AUTH_KEY')
 
 
 class TestConfig(Config):
@@ -35,6 +32,7 @@ class TestConfig(Config):
     APP_LOG_LEVEL = logging.DEBUG
     MAIL_LOG_LEVEL = logging.ERROR
     LOCAL_CHARTS_DIR_PATH = "charts/"
+    CLIENT_AUTH_KEY = 'testing'
 
 
 config = globals()[os.getenv('EPILEPSY_CONFIG', 'TestConfig')]
