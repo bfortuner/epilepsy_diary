@@ -16,7 +16,7 @@ class Config(object):
 class ProdConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.getenv(
-        'EPILEPSY_DATABASE_URI', 'sqlite:///database.db')
+        'EPILEPSY_DATABASE_URI')
     S3_USER_CHARTS_BUCKET = 'epilepsy-user-charts'
     APP_LOG_LEVEL = logging.INFO
     MAIL_LOG_LEVEL = logging.ERROR
@@ -27,7 +27,9 @@ class ProdConfig(Config):
 class TestConfig(Config):
     TESTING = True
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        'EPILEPSY_DATABASE_URI')
+    # 'sqlite:///database.db' SQLite doesn't play well w SQLAlchemy :(
     S3_USER_CHARTS_BUCKET = 'test-epilepsy-user-charts'
     APP_LOG_LEVEL = logging.DEBUG
     MAIL_LOG_LEVEL = logging.ERROR

@@ -34,10 +34,10 @@ print "Event Tracking Status Types loaded"
 # current_time = datetime.datetime.now()
 # event_complete = Event(User.query.filter_by(
 #     username=ADMIN_USERNAME).first().id,
-#     current_time, AURA_EVENT_TYPE, 3, "1-3", 'COMPLETE')
+#     current_time, SEIZURE_EVENT_TYPE, 4, "1-3", 'COMPLETE')
 # event_complete1 = Event(User.query.filter_by(
 #     username=ADMIN_USERNAME).first().id,
-#     current_time - datetime.timedelta(days=3), SEIZURE_EVENT_TYPE, 3, "1-3", 'COMPLETE')
+#     current_time, SEIZURE_EVENT_TYPE, 3, "1-3", 'COMPLETE')
 # event_complete2 = Event(User.query.filter_by(
 #     username=ADMIN_USERNAME).first().id,
 #     current_time - datetime.timedelta(days=5), SEIZURE_EVENT_TYPE, 2, "1-3", 'COMPLETE')
@@ -52,9 +52,9 @@ print "Event Tracking Status Types loaded"
 # db.add(event_complete)
 # db.add(event_complete1)
 # db.add(event_complete2)
-# db.add(event_complete3)
-# db.add(event_complete4)
-# db.add(event_incomplete)
+# # db.add(event_complete3)
+# # db.add(event_complete4)
+# # db.add(event_incomplete)
 # db.commit()
 
 

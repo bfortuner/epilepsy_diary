@@ -71,8 +71,7 @@ def test_get_event_count_in_date_range():
         user_events_count = event_manager.get_event_count_in_date_range(
             username=ADMIN_USERNAME,
             start_time=start_time,
-            end_time=end_time,
-            event_type=SEIZURE_EVENT_TYPE)
+            end_time=end_time)
         assert user_events_count[0][1] == 1
         assert user_events_count[1][1] == 2
     finally:
