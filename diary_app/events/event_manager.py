@@ -30,8 +30,8 @@ def get_event_count_in_date_range(username, start_time, end_time):
     aura_count_case_when = case([(Event.event_type == "aura", 1), ],
                       else_=0).label("auras")
     result = (db.query(func.date(Event.event_time),
-                       func.count(seizure_count_case_when),
-                       func.count(aura_count_case_when))
+                       func.sum(seizure_count_case_when),
+                       func.sum(aura_count_case_when))
               .filter_by(user_id=user.id)
               .filter_by(event_tracking_status_name="COMPLETE")
               .filter(Event.event_time.between(start_time, end_time))
