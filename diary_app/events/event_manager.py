@@ -2,6 +2,7 @@ from diary_app import db
 from sqlalchemy.sql import case, func
 from diary_app.events.models import Event
 from diary_app.users import user_manager
+from diary_app.events.constants import SEIZURE_EVENT_TYPE, AURA_EVENT_TYPE
 
 
 def get_event(event_id):
@@ -25,10 +26,14 @@ def get_event_count_in_date_range(username, start_time, end_time):
     e.g. [(datetime(), 1, 2), (datetime(), 2, 0)]
     """
     user = user_manager.get_or_create_user(username)
-    seizure_count_case_when = case(
-        [(Event.event_type == "seizure", 1), ], else_=0).label("seizures")
-    aura_count_case_when = case([(Event.event_type == "aura", 1), ],
-                      else_=0).label("auras")
+    seizure_count_case_when = (case(
+        [(Event.event_type == SEIZURE_EVENT_TYPE, 1), ], else_=0)
+        .label(SEIZURE_EVENT_TYPE))
+
+    aura_count_case_when = (case(
+        [(Event.event_type == AURA_EVENT_TYPE, 1), ],
+        else_=0).label(AURA_EVENT_TYPE))
+
     result = (db.query(func.date(Event.event_time),
                        func.sum(seizure_count_case_when),
                        func.sum(aura_count_case_when))

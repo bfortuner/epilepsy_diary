@@ -48,20 +48,22 @@ def test_get_events_in_date_range():
 
 def test_get_event_count_in_date_range():
     events_to_delete = []
-    current_time = datetime.datetime.utcnow()
+    current_time = datetime.datetime(2016, 1, 1, 20, 0, 0)
     start_time = current_time - datetime.timedelta(days=5)
     end_time = current_time
 
     event_before_start = helpers.create_test_event_by_date(
         current_time - datetime.timedelta(days=10), SEIZURE_EVENT_TYPE)
+
     event_inside_date_range = helpers.create_test_event_by_date(
-        current_time - datetime.timedelta(hours=5), SEIZURE_EVENT_TYPE)
+        current_time - datetime.timedelta(hours=1), SEIZURE_EVENT_TYPE)
     event_inside_date_range2 = helpers.create_test_event_by_date(
-        current_time - datetime.timedelta(hours=10), SEIZURE_EVENT_TYPE)
+        current_time - datetime.timedelta(hours=10), AURA_EVENT_TYPE)
     event_inside_date_range3 = helpers.create_test_event_by_date(
-        current_time - datetime.timedelta(days=3), SEIZURE_EVENT_TYPE)
+        current_time - datetime.timedelta(days=3), AURA_EVENT_TYPE)
+
     event_after_start = helpers.create_test_event_by_date(
-        current_time + datetime.timedelta(days=1), SEIZURE_EVENT_TYPE)
+        current_time + datetime.timedelta(days=1), AURA_EVENT_TYPE)
     events_to_delete.extend(
         [event_before_start.id, event_inside_date_range.id,
             event_after_start.id, event_inside_date_range2.id,
@@ -72,8 +74,15 @@ def test_get_event_count_in_date_range():
             username=ADMIN_USERNAME,
             start_time=start_time,
             end_time=end_time)
-        assert user_events_count[0][1] == 1
-        assert user_events_count[1][1] == 2
+
+        # Seizures
+        assert user_events_count[0][1] == 0
+        assert user_events_count[1][1] == 1
+
+        # Auras
+        assert user_events_count[0][2] == 1
+        assert user_events_count[1][2] == 1
+
     finally:
         helpers.delete_events(events_to_delete)
 

@@ -2,5 +2,5 @@ charts/*.png
 *.pyc
 *.db
 .projectcmdhistory
-tests/.cache
+.cache
 __pycache__
