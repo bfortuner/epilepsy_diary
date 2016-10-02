@@ -1,3 +1,4 @@
+import os
 import plotly.plotly as py
 import plotly.graph_objs as go
 from diary_app.utils import id_generator
@@ -89,13 +90,18 @@ def build_grouped_bar_chart(chart_data):
     )
     chart = go.Figure(data=bars, layout=chart_layout)
     filename = id_generator.generate_chart_image_filename()
-    py.image.save_as(chart, filename=config.LOCAL_CHARTS_DIR_PATH + filename)
-
-    s3.upload_file(filename, config.LOCAL_CHARTS_DIR_PATH +
-                   filename, config.S3_USER_CHARTS_BUCKET)
+    filepath = config.LOCAL_CHARTS_DIR_PATH + filename
+    py.image.save_as(chart, filename=filepath)
+    s3.upload_file(filename, filepath, config.S3_USER_CHARTS_BUCKET)
     download_url = s3.get_download_url(
         bucket=config.S3_USER_CHARTS_BUCKET,
         path=filename,
         expiry=603148)
 
+    cleanup_file(filepath)
+
     return download_url
+
+
+def cleanup_file(filepath):
+    os.remove(filepath)
