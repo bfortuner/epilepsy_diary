@@ -5,10 +5,10 @@ Python API for handling user requests from Hapi Facebook Messenger Bot
 
 ### Key Links
 
-HapiBot Facebook Page: [View Page](https://www.facebook.com/hapibot)
-Message HapiBot: [Message Me](http://l.facebook.com/l.php?u=http%3A%2F%2Fm.me%2Fhapibot&h=1AQFFtodm)
-Frontend Repo: [Github](https://github.com/bfortuner/hapibot)
-Hapi FB Developer Page: [Developers](https://developers.facebook.com/apps/1062967727132759/dashboard)
+* HapiBot Facebook Page: [View Page](https://www.facebook.com/hapibot)
+* Message HapiBot: [Message Me](http://l.facebook.com/l.php?u=http%3A%2F%2Fm.me%2Fhapibot&h=1AQFFtodm)
+* Frontend Repo: [Github](https://github.com/bfortuner/hapibot)
+* Hapi FB Developer Page: [Developers](https://developers.facebook.com/apps/1062967727132759/dashboard)
 
 
 ### Setup
