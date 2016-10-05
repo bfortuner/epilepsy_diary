@@ -9,7 +9,7 @@ class Config(object):
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
     SECRET_KEY = os.getenv('EPILEPSY_APP_SECRET_KEY', 'secret')
     DB_ISOLATION_LEVEL = 'READ UNCOMMITTED'
-    PLOTLY_USERNAME = 'hapibot'
+    PLOTLY_USERNAME = os.getenv('EPILEPSY_PLOTLY_USERNAME')
     PLOTLY_PASSWORD = os.getenv('EPILEPSY_PLOTLY_PASSWORD')
 
 
@@ -33,7 +33,7 @@ class TestConfig(Config):
     S3_USER_CHARTS_BUCKET = 'test-epilepsy-user-charts'
     APP_LOG_LEVEL = logging.DEBUG
     MAIL_LOG_LEVEL = logging.ERROR
-    LOCAL_CHARTS_DIR_PATH = "charts/"
+    LOCAL_CHARTS_DIR_PATH = "/tmp/"
     CLIENT_AUTH_KEY = 'testing'
 
 
