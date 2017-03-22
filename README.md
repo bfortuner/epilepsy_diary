@@ -82,3 +82,5 @@ $ heroku pg:psql --app hapibackend DATABASE  #login to postgres db
 ngrok http 8000  # Host the Node Frontend locally (update the FB developer page webhook)
 ```
 
+### Plotly broke. Need to fix
+ Looks like you don't have 'read-write' permission to your 'home' ('~') directory or to our '~/.plotly' directory. That means plotly's python api can't setup local configuration files. No problem though! You'll just have to sign-in using 'plotly.plotly.sign_in()'. For help with that: 'help(plotly.plotly.sign_in)'.
